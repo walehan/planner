@@ -23,7 +23,7 @@ module Api
         @schedule = Schedule.new(schedule_params)
 
         if @schedule.save
-          render json: @schedule, status: :created, location: @schedule
+          render json: @schedule, status: :created
         else
           render json: @schedule.errors, status: :unprocessable_entity
         end
