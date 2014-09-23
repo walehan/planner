@@ -20,7 +20,7 @@ module Api
       # POST /schedules
       # POST /schedules.json
       def create
-        @schedule = Schedule.new(params[:schedule])
+        @schedule = Schedule.new(schedule_params)
 
         if @schedule.save
           render json: @schedule, status: :created, location: @schedule
@@ -34,7 +34,7 @@ module Api
       def update
         @schedule = Schedule.find(params[:id])
 
-        if @schedule.update(params[:schedule])
+        if @schedule.update(schedule_params)
           head :no_content
         else
           render json: @schedule.errors, status: :unprocessable_entity
@@ -49,6 +49,15 @@ module Api
 
         head :no_content
       end
+
+      private
+      # Using a private method to encapsulate the permissible parameters
+      # is just a good pattern since you'll be able to reuse the same
+      # permit list between create and update. Also, you can specialize
+      # this method with per-user checking of permissible attributes.
+        def schedule_params 
+          params.require(:schedule).permit(:name, :user_id)
+        end
     end
   end
 end
