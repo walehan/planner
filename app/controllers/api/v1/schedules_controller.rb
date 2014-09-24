@@ -12,8 +12,7 @@ module Api
       # GET /schedules/1
       # GET /schedules/1.json
       def show
-        @schedule = Schedule.find(params[:id])
-
+        @schedule = Schedule.find_by_id(params[:id])
         render json: @schedule
       end
 

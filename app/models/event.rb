@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   validates :end_time, presence: true
 
   validate :address_or_location_must_be_specified
-  validate :event_does_not_overlap_with_scheduled_events
+  # validate :event_does_not_overlap_with_scheduled_events
 
   # validation methods
   def address_or_location_must_be_specified
